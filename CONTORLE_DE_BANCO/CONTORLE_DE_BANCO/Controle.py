@@ -45,23 +45,25 @@ def criar_usuario():
 
     janela_criar = tk.Toplevel()
     janela_criar.title("Criar Usuário")
+    janela_criar.state('zoomed')
 
-    janela_criar.geometry("400x400")
+    frame = tk.Frame(janela_criar)
+    frame.pack(expand=True)
 
-    tk.Label(janela_criar, text="Nome de Usuário:", font=("Arial", 14)).pack(pady=10)
-    entry_username = tk.Entry(janela_criar, font=("Arial", 14), width=40)
+    tk.Label(frame, text="Nome de Usuário:", font=("Arial", 14)).pack(pady=10)
+    entry_username = tk.Entry(frame, font=("Arial", 14), width=40)
     entry_username.pack(pady=10)
     
-    tk.Label(janela_criar, text="Senha:", font=("Arial", 14)).pack(pady=10)
-    entry_password = tk.Entry(janela_criar, font=("Arial", 14), show="*", width=40)
+    tk.Label(frame, text="Senha:", font=("Arial", 14)).pack(pady=10)
+    entry_password = tk.Entry(frame, font=("Arial", 14), show="*", width=40)
     entry_password.pack(pady=10)
 
     tipo_conta_var = tk.StringVar(value="corrente")
-    tk.Radiobutton(janela_criar, text="Corrente", variable=tipo_conta_var, value="corrente", font=("Arial", 14)).pack(pady=10)
-    tk.Radiobutton(janela_criar, text="Poupança", variable=tipo_conta_var, value="poupanca", font=("Arial", 14)).pack(pady=10)
+    tk.Radiobutton(frame, text="Corrente", variable=tipo_conta_var, value="corrente", font=("Arial", 14)).pack(pady=10)
+    tk.Radiobutton(frame, text="Poupança", variable=tipo_conta_var, value="poupanca", font=("Arial", 14)).pack(pady=10)
 
-    tk.Button(janela_criar, text="Salvar", command=salvar_usuario, font=("Arial", 14), width=20).pack(pady=20)
-    tk.Button(janela_criar, text="Voltar", command=voltar_login, font=("Arial", 14), width=20).pack(pady=10)
+    tk.Button(frame, text="Salvar", command=salvar_usuario, font=("Arial", 14), width=20).pack(pady=20)
+    tk.Button(frame, text="Voltar", command=voltar_login, font=("Arial", 14), width=20).pack(pady=10)
 
 def login_usuario():
     username = entry_username.get()
@@ -80,8 +82,10 @@ def login_usuario():
 def abrir_menu_principal(usuario):
     janela_menu = tk.Tk()
     janela_menu.title("Menu Principal")
+    janela_menu.state('zoomed')
 
-    janela_menu.geometry("400x400")
+    frame = tk.Frame(janela_menu)
+    frame.pack(expand=True)
 
     saldo = usuario[3]
     extrato = usuario[4]
@@ -135,20 +139,20 @@ def abrir_menu_principal(usuario):
         janela_menu.destroy()
         root.deiconify()
 
-    tk.Label(janela_menu, text=f"Bem-vindo(a), {usuario[1]}!", font=("Arial", 16)).pack(pady=20)
-    lbl_saldo = tk.Label(janela_menu, text=f"Saldo Atual: R${saldo:.2f}", font=("Arial", 16))
+    tk.Label(frame, text=f"Bem-vindo(a), {usuario[1]}!", font=("Arial", 16)).pack(pady=20)
+    lbl_saldo = tk.Label(frame, text=f"Saldo Atual: R${saldo:.2f}", font=("Arial", 16))
     lbl_saldo.pack(pady=10)
 
-    tk.Label(janela_menu, text="Valor:", font=("Arial", 14)).pack(pady=10)
-    entry_valor = tk.Entry(janela_menu, font=("Arial", 14), width=40)
+    tk.Label(frame, text="Valor:", font=("Arial", 14)).pack(pady=10)
+    entry_valor = tk.Entry(frame, font=("Arial", 14), width=40)
     entry_valor.pack(pady=10)
 
     largura_botao = 20
     
-    tk.Button(janela_menu, text="Depositar", command=realizar_deposito, font=("Arial", 14), width=largura_botao).pack(pady=10)
-    tk.Button(janela_menu, text="Sacar", command=realizar_saque, font=("Arial", 14), width=largura_botao).pack(pady=10)
-    tk.Button(janela_menu, text="Ver Extrato", command=mostrar_extrato, font=("Arial", 14), width=largura_botao).pack(pady=10)
-    tk.Button(janela_menu, text="Sair", command=sair, font=("Arial", 14), width=largura_botao).pack(pady=20)
+    tk.Button(frame, text="Depositar", command=realizar_deposito, font=("Arial", 14), width=largura_botao).pack(pady=10)
+    tk.Button(frame, text="Sacar", command=realizar_saque, font=("Arial", 14), width=largura_botao).pack(pady=10)
+    tk.Button(frame, text="Ver Extrato", command=mostrar_extrato, font=("Arial", 14), width=largura_botao).pack(pady=10)
+    tk.Button(frame, text="Sair", command=sair, font=("Arial", 14), width=largura_botao).pack(pady=20)
 
 root = tk.Tk()
 root.title("Sistema Bancário")
